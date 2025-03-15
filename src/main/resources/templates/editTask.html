@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>タスク変更</title>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/style.css}">
+</head>
+
+<body>
+    <h1>タスク変更</h1>
+
+    <!-- フォームのactionで、taskIdをURLに埋め込んで送信 -->
+    <form action="@{/tasks/{taskId}/editTask(taskId=${task.id})}" method="post">
+        <table border="1">
+            <tr>
+                <th>カテゴリー</th>
+                <td>
+                    <!-- 既存のcategoryを選択状態にする -->
+                    <div th:each="category : ${categories}">
+                        <input type="radio" name="categoryId" th:value="${category.id}"
+                               th:id="'category-' + ${category.id}"
+                               th:checked="${category.id == task.category.id}" required>
+                        <label th:for="'category-' + ${category.id}" th:text="${category.name}"></label>
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <th>タイトル</th>
+                <td>
+                    <!-- タスクのタイトルを入力欄に反映 -->
+                    <input type="text" name="title" th:value="${task.title}">
+                </td>
+            </tr>
+            <tr>
+                <th>期限</th>
+                <td>
+                    <!-- タスクの期限を日付欄に反映 -->
+                    <input type="date" name="closingDate" th:value="${task.closingDate}">
+                </td>
+            </tr>
+            <tr>
+                <th>進捗状況</th>
+                <td>
+                    <!-- タスクの進捗状況に応じたラジオボタンを選択状態にする -->
+                    <div>
+                        <input type="radio" name="progress" value="0" id="progress-0" th:checked="${task.progress == 0}" required>
+                        <label for="progress-0">未着手</label>
+                    </div>
+                    <div>
+                        <input type="radio" name="progress" value="1" id="progress-1" th:checked="${task.progress == 1}">
+                        <label for="progress-1">進行中</label>
+                    </div>
+                    <div>
+                        <input type="radio" name="progress" value="2" id="progress-2" th:checked="${task.progress == 2}">
+                        <label for="progress-2">完了</label>
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <th>メモ</th>
+                <td>
+                    <!-- タスクのメモをテキストエリアに反映 -->
+                    <textarea name="memo" th:text="${task.memo}"></textarea>
+                </td>
+            </tr>
+        </table>
+        <button>変更</button>
+    </form>
+</body>
+
+</html>
