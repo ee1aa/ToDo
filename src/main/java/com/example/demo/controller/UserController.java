@@ -51,7 +51,7 @@ public class UserController {
 	}
 
 	// ログアウト処理
-	@PostMapping("/logout")
+	@GetMapping("/logout")
 	public String logout(HttpSession session) {
 		if (session != null) {
 			session.invalidate(); // セッションを無効化

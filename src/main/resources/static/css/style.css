@@ -4,6 +4,8 @@
 body {
 	text-align: center;
 	min-width: 900px;
+	min-height: 100vh;
+	background-color: lightgray;
 }
 
 .h1 {
@@ -13,18 +15,32 @@ body {
 .login {
 	text-align: right;
 	padding-right: 20px;
+	padding-top: 15px;
+}
+
+.logout-link{
+	margin-top: 10px;
 }
 
 /*ヘッダー、ナビゲーションメニュー、フッター*/
 header,
-nav,
-footer {
+nav {
 	background-color: dimgray;
 	color: #ffffff;
 	padding-top: 5px;
 	padding-bottom: 5px;
 	text-align: left;
 	padding-left: 10px;
+}
+
+nav{
+	margin-top: 10px;
+}
+
+header {
+	display: flex;
+	justify-content: space-between;
+	align-items: center
 }
 
 .user-box {
@@ -37,10 +53,19 @@ footer {
 	margin: 25px auto;
 }
 
-/*ヘッダー、ナビゲーション内リンク*/
-header a,
+.input {
+	margin-bottom: 10px;
+}
+
+/*ナビゲーション内リンク*/
 nav a {
 	color: #ffffff;
+}
+
+header h1 a {
+	color: #ffffff;
+	text-decoration: none;
+
 }
 
 /*ヘッダー内見出し*/
@@ -52,13 +77,13 @@ header h1 {
 
 /*仕切り線*/
 hr {
-	border-top: 2px dashed dimgray;
+	border-top: 1px;
 }
 
 /*メイン*/
 main {
 	background-color: lightgray;
-	min-height: 50px;
+	min-height: 100vh;
 	padding: 20px;
 }
 
@@ -68,6 +93,7 @@ th,
 td {
 	border-collapse: collapse;
 	border: solid 1px black;
+	background-color: #fff
 }
 
 /*表*/
@@ -89,7 +115,7 @@ button {
 	background-color: dimgray;
 	color: #ffffff;
 	border: none;
-	width: 150px;
+	width: 100%;
 	cursor: pointer;
 }
 
@@ -98,7 +124,7 @@ button:hover {
 	background-color: lightgray;
 }
 
-.radio-group{
+.radio-group {
 	text-align: left;
 }
 
@@ -109,7 +135,7 @@ button:hover {
 	/* 各ラジオボタンに余白を追加 */
 }
 
-.create-task{
+.create-task {
 	display: flex;
 	padding: 10px 50px 10px 30px;
 }

@@ -5,6 +5,6 @@
 	<div class="login">
 		<span th:text="'こんにちは、'+${session.user.name}+'さん'"></span><br>
 		<!-- POSTでログアウトを実行 -->
-		<a th:href="@{/logout}" th:method="post" class="logout-link">ログアウト</a>
+		<a th:href="@{/logout}" class="logout-link">ログアウト</a>
 	</div>
 </header>
