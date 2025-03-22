@@ -1,5 +1,7 @@
 package com.example.demo.controller;
 
+import java.util.Optional;
+
 import jakarta.servlet.http.HttpSession;
 
 import org.slf4j.Logger;
@@ -10,12 +12,14 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.SessionAttributes;
 
 import com.example.demo.entity.User;
 import com.example.demo.model.Account;
 import com.example.demo.repository.UserRepository;
 
 @Controller
+@SessionAttributes("user")
 
 public class UserController {
 
@@ -34,37 +38,28 @@ public class UserController {
 	Account account;
 
 	// ログイン画面を表示
-
-	@GetMapping({ "/", "/login", "/logout" })
+	@GetMapping({ "/", "/login" })
 
 	public String index(@RequestParam(name = "error", defaultValue = "") String error, Model model) {
 
-		logger.info("ログイン画面を表示");
-
-		// **ログアウト時のみセッションを無効化する**
-
-		if (error.equals("logout")) {
-
-			session.invalidate();
-
-			logger.debug("ログアウト時にセッションを無効化");
-
-		}
-
-		if (error.equals("notLoggedIn")) {
-
+		// ログインエラーメッセージ処理
+		if ("notLoggedIn".equals(error)) {
 			model.addAttribute("message", "ログインしてください");
-
-			logger.warn("ログインしていない状態でアクセス");
-
 		}
 
 		return "login";
+	}
 
+	// ログアウト処理
+	@PostMapping("/logout")
+	public String logout(HttpSession session) {
+		if (session != null) {
+			session.invalidate(); // セッションを無効化
+		}
+		return "redirect:/login?error=logout";
 	}
 
 	// ログインを実行
-
 	@PostMapping("/login")
 
 	public String login(
@@ -97,8 +92,8 @@ public class UserController {
 
 			// ユーザー情報を取得
 
-			User user = userRepository.findByEmail(email);
-
+			Optional<User> userOptional = userRepository.findByEmail(email);
+			User user = userOptional.get();
 			logger.debug("取得したユーザー: {}", user);
 
 			// メールが登録されていない、またはパスワードが不一致の場合
@@ -132,7 +127,8 @@ public class UserController {
 				logger.debug("セッションから取得したユーザー: {}", sessionUser.getEmail());
 
 			}
-
+			model.addAttribute("user", user);
+			session.setAttribute("userId", user.getId());
 			return "redirect:/tasks";
 
 		} catch (Exception e) {
@@ -187,7 +183,7 @@ public class UserController {
 
 			logger.warn("パスワードが一致しません: {} vs {}", password, confirmPassword);
 
-			return "login"; // 登録画面に戻る
+			return "createUser"; // 登録画面に戻る
 
 		}
 
@@ -199,7 +195,7 @@ public class UserController {
 
 			logger.warn("登録時のメールアドレスまたはパスワードが未入力");
 
-			return "login";
+			return "createUser";
 
 		}
 

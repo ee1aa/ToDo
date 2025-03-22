@@ -5,6 +5,18 @@
 		<meta charset="UTF-8">
 		<title></title>
 		<link rel="stylesheet" type="text/css" th:href="@{/css/style.css}">
+		<script>
+			// 削除確認ダイアログ
+			function confirmDelete(event) {
+				// ダイアログ表示
+				const confirmed = confirm("タスクを削除します。よろしいですか？");
+
+				// キャンセルの場合はフォーム送信を中断
+				if (!confirmed) {
+					event.preventDefault();
+				}
+			}
+		</script>
 	</head>
 
 	<body>
@@ -15,8 +27,10 @@
 			<a th:each="c:${categories}" th:href="@{/tasks(categoryId=${c.id})}">
 				<span th:text="${c.name}" style="padding-left: 10px;"></span>
 			</a>
-			<a href="/createTask" style="padding-left: 10px;">新規タスク作成</a>
 		</nav>
+		<div class="create-task">
+			<a href="/createTask" style="font-size: large;">新規タスク作成</a>
+		</div>
 		<table>
 			<tr>
 				<th>NO</th>
@@ -32,14 +46,22 @@
 				<td th:text="${task.title}"></td>
 				<td th:text="${task.category.name}"></td>
 				<td th:text="${task.closingDate}"></td>
-				<td th:text="${task.progress}"></td>
+				<td>
+					<span th:switch="${task.progress}">
+						<span th:case="0">未着手</span>
+						<span th:case="1">進行中</span>
+						<span th:case="2">完了</span>
+						<span th:case="*">不明</span> <!-- 万が一予期しない値が来た場合 -->
+					</span>
+				</td>
 				<td>
 					<form th:action="@{/tasks/{taskId}/editTask(taskId=${task.id})}" method="get">
 						<button>更新</button>
 					</form>
 				</td>
 				<td>
-					<form th:action="@{/tasks/{taskId}/delete(taskId=${task.id})}" method="post">
+					<form th:action="@{/tasks/{taskId}/delete(taskId=${task.id})}" method="post"
+						onsubmit="confirmDelete(event)">
 						<button>削除</button>
 					</form>
 				</td>

@@ -2,19 +2,39 @@
 
 /*全体*/
 body {
-	background-color: #eff0f7;
 	text-align: center;
 	min-width: 900px;
+}
+
+.h1 {
+	padding: 20px 40px;
+}
+
+.login {
+	text-align: right;
+	padding-right: 20px;
 }
 
 /*ヘッダー、ナビゲーションメニュー、フッター*/
 header,
 nav,
 footer {
-	background-color: #45496a;
+	background-color: dimgray;
 	color: #ffffff;
 	padding-top: 5px;
 	padding-bottom: 5px;
+	text-align: left;
+	padding-left: 10px;
+}
+
+.user-box {
+	border: 2px solid;
+	background-color: #ffffff;
+	padding: 30px;
+	width: 500px;
+	display: flex;
+	justify-content: center;
+	margin: 25px auto;
 }
 
 /*ヘッダー、ナビゲーション内リンク*/
@@ -26,17 +46,18 @@ nav a {
 /*ヘッダー内見出し*/
 header h1 {
 	font-size: 20pt;
-	margin: 10px auto;
+	margin: 10px;
+	text-align: start;
 }
 
 /*仕切り線*/
 hr {
-	border-top: 2px dashed #7d8bae;
+	border-top: 2px dashed dimgray;
 }
 
 /*メイン*/
 main {
-	background-color: #ffffff;
+	background-color: lightgray;
 	min-height: 50px;
 	padding: 20px;
 }
@@ -46,7 +67,7 @@ table,
 th,
 td {
 	border-collapse: collapse;
-	border: 1px solid #7d8bae;
+	border: solid 1px black;
 }
 
 /*表*/
@@ -57,7 +78,7 @@ table {
 
 /*表見出しセル*/
 table th {
-	background: #7d8bae;
+	background: dimgray;
 	color: #ffffff;
 }
 
@@ -65,7 +86,7 @@ table th {
 button {
 	margin: 2px;
 	padding: 5px 20px;
-	background-color: #e5857b;
+	background-color: dimgray;
 	color: #ffffff;
 	border: none;
 	width: 150px;
@@ -74,5 +95,21 @@ button {
 
 /*送信ボタン（マウスオーバー時）*/
 button:hover {
-	background-color: #f1b2b2;
+	background-color: lightgray;
+}
+
+.radio-group{
+	text-align: left;
+}
+
+.radio {
+	display: inline-flex;
+	/* 横並び */
+	margin-right: 15px;
+	/* 各ラジオボタンに余白を追加 */
+}
+
+.create-task{
+	display: flex;
+	padding: 10px 50px 10px 30px;
 }

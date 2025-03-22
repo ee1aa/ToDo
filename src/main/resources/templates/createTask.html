@@ -8,6 +8,7 @@
 	</head>
 
 	<body>
+		<header th:replace="header"></header>
 		<h1>新規タスク作成</h1>
 
 		<form action="/createTask" method="post">
@@ -15,46 +16,52 @@
 				<tr>
 					<th>カテゴリー</th>
 					<td>
-						<div th:each="category : ${categories}">
-							<input type="radio" name="categoryId" th:value="${category.id}"
-								th:id="'category-' + ${category.id}" required>
-							<label th:for="'category-' + ${category.id}" th:text="${category.name}"></label>
+						<div class="radio-group">
+							<div class="radio" th:each="category : ${categories}">
+								<input type="radio" name="categoryId" th:value="${category.id}"
+									th:id="'category-' + ${category.id}" required>
+								<label th:for="'category-' + ${category.id}" th:text="${category.name}"></label>
+							</div>
 						</div>
 					</td>
 				</tr>
 				<tr>
 					<th>タイトル</th>
 					<td>
-						<input type="text" name="title">
+						<div class="input">
+							<input style="min-width: 99%;" type="text" name="title">
+						</div>
 					</td>
 				</tr>
 				<tr>
 					<th>期限</th>
 					<td>
-						<input type="date" name="closingDate">
+						<input style="min-width: 99%;" type="date" name="closingDate">
 					</td>
 				</tr>
 				<tr>
 					<th>進捗状況</th>
 					<td>
-						<div>
-							<input type="radio" name="progress" value="0" id="progress-0" required>
-							<label for="progress-0">未着手</label>
-						</div>
-						<div>
-							<input type="radio" name="progress" value="1" id="progress-1">
-							<label for="progress-1">進行中</label>
-						</div>
-						<div>
-							<input type="radio" name="progress" value="2" id="progress-2">
-							<label for="progress-2">完了</label>
+						<div class="radio-group">
+							<div class="radio">
+								<input type="radio" name="progress" value="0" id="progress-0" required>
+								<label for="progress-0">未着手</label>
+							</div>
+							<div class="radio">
+								<input type="radio" name="progress" value="1" id="progress-1">
+								<label for="progress-1">進行中</label>
+							</div>
+							<div class="radio">
+								<input type="radio" name="progress" value="2" id="progress-2">
+								<label for="progress-2">完了</label>
+							</div>
 						</div>
 					</td>
 				</tr>
 				<tr>
 					<th>メモ</th>
 					<td>
-						<textarea name="memo"></textarea>
+						<textarea style="min-width: 99%; min-height: 100px" name="memo"></textarea>
 					</td>
 				</tr>
 			</table>

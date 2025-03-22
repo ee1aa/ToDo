@@ -90,4 +90,29 @@ public class Task {
 	public String getMemo() {
 		return memo;
 	}
+
+	// セッター
+	public void setCategory(Category category) {
+		this.category = category;
+	}
+
+	public void setUser(User user) {
+		this.user = user;
+	}
+
+	public void setTitle(String title) {
+		this.title = title;
+	}
+
+	public void setClosingDate(LocalDate closingDate) {
+		this.closingDate = closingDate;
+	}
+
+	public void setProgress(Integer progress) {
+		this.progress = progress;
+	}
+
+	public void setMemo(String memo) {
+		this.memo = memo;
+	}
 }
