@@ -42,10 +42,10 @@
 			</tr>
 			<tr th:each="task:${tasks}">
 				<td th:text="${task.id}"></td>
-				<td th:text="${task.title}"></td>
-				<td th:text="${task.category.name}"></td>
-				<td th:text="${task.closingDate}"></td>
-				<td>
+				<td class="text-left" th:text="${task.title}"></td>
+				<td class="text-left" th:text="${task.category.name}"></td>
+				<td class="text-left" th:text="${task.closingDate}"></td>
+				<td class="text-left">
 					<span th:switch="${task.progress}">
 						<span th:case="0">未着手</span>
 						<span th:case="1">進行中</span>
@@ -55,13 +55,13 @@
 				</td>
 				<td>
 					<form th:action="@{/tasks/{taskId}/editTask(taskId=${task.id})}" method="get">
-						<button>更新</button>
+						<button class="task-button">更新</button>
 					</form>
 				</td>
 				<td>
 					<form th:action="@{/tasks/{taskId}/delete(taskId=${task.id})}" method="post"
 						onsubmit="confirmDelete(event)">
-						<button>削除</button>
+						<button class="task-button">削除</button>
 					</form>
 				</td>
 			</tr>

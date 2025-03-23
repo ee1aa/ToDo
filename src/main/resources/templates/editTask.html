@@ -9,7 +9,7 @@
 
 	<body>
 		<header th:replace="header"></header>
-		<h1>タスク変更</h1>
+		<p>タスク変更</p>
 
 		<!-- フォームのactionで、taskIdをURLに埋め込んで送信 -->
 		<form th:action="@{/tasks/{taskId}/editTask(taskId=${task.id})}" method="post">
@@ -76,7 +76,7 @@
 					</td>
 				</tr>
 			</table>
-			<button>変更</button>
+			<button class="edit-create-button">変更</button>
 		</form>
 	</body>
 
